@@ -1,0 +1,52 @@
+# Small config for quick synthetic training
+model:
+  backbone: 18
+  num_keypoints: 8
+  freeze_backbone: true
+  input_size: 256
+
+detector:
+  model_name: "yolov8n"
+  confidence_threshold: 0.3
+  nms_threshold: 0.45
+
+keypoint_detector:
+  hidden_dim: 64
+  num_layers: 2
+  dropout: 0.1
+
+training:
+  batch_size: 4
+  num_epochs: 10
+  learning_rate: 1e-3
+  weight_decay: 1e-4
+  optimizer: "adam"
+
+dataset:
+  name: "synthetic"
+  num_classes: 1
+  input_size: 256
+  augmentation: false
+
+inference:
+  conf_threshold: 0.3
+  nms_threshold: 0.45
+  device: "cpu"
+  pnp_solver: "ITERATIVE"
+  use_ransac: true
+  ransac_iterations: 50
+
+logging:
+  log_dir: "./workdir"
+  save_interval: 5
+  tensorboard: false
+  wandb: false
+
+data_loader:
+  num_workers: 0
+  pin_memory: false
+
+misc:
+  seed: 42
+  deterministic: false
+  mixed_precision: false
